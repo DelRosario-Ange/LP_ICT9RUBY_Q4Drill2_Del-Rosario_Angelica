@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Index Checker</title>
+    <style>
+        body{
+            font-family: 'Gill Sans MT';
+            text-align: center;
+            margin-top: 80px;
+            background-color: #cd7474;
+        }
+        .container{
+            background: #834b4b;
+            padding: 20px;
+            width: 300px;
+            margin: auto;
+            border: 3px solid #452828;
+            border-radius: 15px;
+        }
+        input{
+            padding: 6px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+        button{
+            padding: 8px;
+            width: 100px;
+            border: 3px solid white;
+            border-radius: 15px;
+        }
+        .output{
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Heat Index Checker</h2>
+        
+        <div class="icon-hexagon"></div>
+
+        <label>Degree in °C</label>
+        <input type="number" id="temp" placeholder="input temperature">
+
+        <label>humidity in %</label>
+        <input type="number" id="humid" placeholder="input humidity">
+
+        <button onclick="checkStatus()">Check</button>
+    </div>
+
+    <script>
+        function checkStatus() {
+            var temp = document.getElementById("temp").value;
+            var humid = document.getElementById("humid").value;
+
+            if (temp===""||humid==="") {
+                alert("Please fill in both inputs.");
+                return;
+            }
+
+            let heatIndex = temp+(0.33*humid)-4;
+            
+            let status = "";
+
+            switch (true) {
+                case (heatIndex <= 27):
+                    status = "Comfortable / Cool";
+                    break;
+                case (heatIndex >= 28 && heatIndex <= 32):
+                    status = "Warm";
+                    break;
+                case (heatIndex >= 33 && heatIndex <= 37):
+                    status = "Hot";
+                    break;
+                case (heatIndex >= 38 && heatIndex <= 41):
+                    status = "Very Hot / Caution";
+                    break;
+                case (heatIndex >= 42):
+                    status = "Extreme Heat / Danger";
+                    break;
+                default:
+                    status = "Out of Range";
+            }
+
+            alert("This page says Heat Index: " + heatIndex + "°C" + "Status: " + status);
+        }
+    </script>
+
+</body>
+</html>
